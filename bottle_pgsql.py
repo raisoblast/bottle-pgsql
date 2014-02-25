@@ -89,7 +89,7 @@ class PgSQLPlugin(object):
                 con = psycopg2.connect(dsn)
                 # Using DictCursor lets us return result as a dictionary instead of the default list
                 if dictrows:
-                    cur = con.cursor(cursor_factory=psycopg2.extras.DictCursor)
+                    cur = con.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
                 else:
                     cur = con.cursor()
             except HTTPResponse, e:
