@@ -35,10 +35,11 @@ argument::
 
     @app.route('/show/:item')
     def show(item, db):
-        row = db.execute('SELECT * from items where name=?', item).fetchone()
+        db.execute('SELECT * from items where name="%s"', (item,))
+        row = db.fetchone()
         if row:
             return template('showitem', page=row)
-        return HTTPError(404, "Page not found")
+        return HTTPError(404, "Entity not found")
 ```
 
 Routes that do not expect a ``db`` keyword argument are not affected.
